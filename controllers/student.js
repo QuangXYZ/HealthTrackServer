@@ -1,7 +1,7 @@
 import { body, validationResult } from 'express-validator';
-
+import HttpStatusCode from '../exceptions/HttpStatusCode.js';
 async function getAllStudent(req, res) {
-    res.status(200).json({
+    res.status(HttpStatusCode.OK).json({
         message: 'Get all students successfully',
         data: [{
             name: 'Nguyen Van A',
@@ -19,6 +19,9 @@ async function getAllStudent(req, res) {
             age: 34
 
         }]
+    })
+    res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+        message: "Can not get students"
     })
 }
 async function getStudentById(req, res) {

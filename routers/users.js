@@ -2,7 +2,7 @@ import express from 'express';
 import { body, validationResult } from 'express-validator';
 import {
     userController
-} from '../controller/index.js'
+} from '../controllers/index.js'
 
 const router = express.Router();
 

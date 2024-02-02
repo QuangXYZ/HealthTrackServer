@@ -1,7 +1,7 @@
 import express from 'express';
 import {
     studentController
-} from '../controller/index.js'
+} from '../controllers/index.js'
 const router = express.Router();
 
 router.get('/', studentController.getAllStudent);
