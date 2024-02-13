@@ -1,5 +1,6 @@
 import { body, validationResult } from 'express-validator';
 import HttpStatusCode from '../exceptions/HttpStatusCode.js';
+import studentRepository from '../repositories/student.js';
 async function getAllStudent(req, res) {
     res.status(HttpStatusCode.OK).json({
         message: 'Get all students successfully',
@@ -31,7 +32,16 @@ async function updateStudent(req, res) {
 
 }
 async function insertStudent(req, res) {
-    
+    try {
+        debugger
+        const student = await studentRepository.insertStudent(req.body)
+        res.status(HttpStatusCode.INSERT_OK).json(
+            {message : "Insert student successfully", data : student});
+    } catch (error) {
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message : "Can not insert student " +  error.message});
+        
+    }
 
 }
 export default {

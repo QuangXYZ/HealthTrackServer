@@ -13,16 +13,30 @@ const login = async (req, res) => {
         return res.status(HttpStatusCode.BAD_REQUEST).json({ errors: error.array() });
     }
     const {email, password} = req.body;
-    await userRepository.login({email, password})
-    res.status(HttpStatusCode.OK).json({ data :'User data is here'});
+    try {
+        let user = await userRepository.login({email, password})
+        res.status(HttpStatusCode.OK).json({message: "Login successfully", data : user});
+    } catch (error) {
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message : error.message});
+    }
+    
+    
 }
 
-const register = async (req, res) => {
+const register = async (req, res) => { 
     const {email,password, name, phoneNumber, address} = req.body
-    await userRepository.register({email,password, name, phoneNumber, address})
-
     myEvent.emit('event.register.user', req.body)
-    res.status(HttpStatusCode.INSERT_OK).json('Post register user'+ email+password+name+phoneNumber+address);
+    try {
+        debugger
+        const user = await userRepository.register({email,password, name, phoneNumber, address}) 
+        res.status(HttpStatusCode.INSERT_OK).json({message : 'Post register user', data : user});
+    } catch (error) {
+        debugger
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message : error.message});
+    }
+
+    
+   // res.status(HttpStatusCode.INSERT_OK).json('Post register user'+ email+password+name+phoneNumber+address);
 }
 
 
