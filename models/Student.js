@@ -1,6 +1,6 @@
 import mongoose, { Schema, ObjectId} from "mongoose"
 import isEmail from "validator/lib/isEmail.js"
-const User = mongoose.model("User", new Schema({
+const Student = mongoose.model("Student", new Schema({
     id : {type : ObjectId},
     name : {
         type : String,
@@ -20,11 +20,6 @@ const User = mongoose.model("User", new Schema({
             message : "Email is incorrect format"
         }
     },
-    password : { 
-        type : String,
-        required : true,
-    
-    },
     phoneNumber : {
         type : String,
         required : true
@@ -36,5 +31,4 @@ const User = mongoose.model("User", new Schema({
 
      
 }))
-
-export default User
+export default Student
