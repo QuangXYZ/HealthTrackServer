@@ -8,5 +8,5 @@ router.get('/', studentController.getAllStudent);
 router.get('/:id', studentController.getStudentById);
 router.patch('/', studentController.updateStudent);
 
-router.post('/insert', studentController.insertStudent);
+router.post('/', studentController.insertStudent);
 export default router;

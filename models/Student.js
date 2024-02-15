@@ -20,11 +20,6 @@ const Student = mongoose.model("Student", new Schema({
             message : "Email is incorrect format"
         }
     },
-    password : { 
-        type : String,
-        required : true,
-    
-    },
     phoneNumber : {
         type : String,
         required : true
