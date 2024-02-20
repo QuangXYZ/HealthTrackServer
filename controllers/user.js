@@ -24,19 +24,19 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => { 
-    const {email,password, name, phoneNumber, address} = req.body
+    const {email,password, name, gender, badges, friends, dateOfBirth, idChallenges} = req.body
     myEvent.emit('event.register.user', req.body)
     try {
         debugger
-        const user = await userRepository.register({email,password, name, phoneNumber, address}) 
+        const user = await userRepository.register({
+            email,password, name, gender, badges, friends, dateOfBirth, idChallenges
+        }) 
         res.status(HttpStatusCode.INSERT_OK).json({message : 'Post register user', data : user});
     } catch (error) {
         debugger
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message : error.message});
     }
 
-    
-   // res.status(HttpStatusCode.INSERT_OK).json('Post register user'+ email+password+name+phoneNumber+address);
 }
 
 
