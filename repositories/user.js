@@ -37,19 +37,24 @@ const login = async ({email,password}) => {
         
     
 }
-const register = async ({email,password, name, phoneNumber, address}) => { 
+const register = async ({
+    email, password, name, gender, badges, friends, dateOfBirth, idChallenges
+    }) => { 
     try {
         debugger
-        const existingUser = await User.findOne({ email}).exec()
+        const existingUser = await User.findOne({email}).exec()
         if (!!existingUser) { 
             throw new Exception("User already exists")
         }
         // encrypt password with salt rounds
         const hashedPassword = await bcrypt.hash(password,parseInt(process.env.SALT_ROUNDS))
-        const newUser = await User.create({name, email, password: hashedPassword, phoneNumber, address})
+        const newUser = await User.create({
+            name, email, password: hashedPassword, gender, badges, friends, dateOfBirth, idChallenges
+        })
         return {...newUser._doc,password: 'Not show'}
     } catch (error) {
         // check model validation
+        
         throw new Exception(Exception.CANNOT_REGISTER_USER)
         
     }
