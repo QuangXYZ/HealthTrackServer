@@ -16,5 +16,7 @@ router.post('/login',
     );
 router.post('/register', userController.register );
 
+router.post('/challenge', userController.joinChallenge );
+
 router.get('/:id', userController.getDetailUser );
 export default router;
