@@ -7,11 +7,17 @@ const Challenge = mongoose.model("Challenge", new Schema({
     },
     dateStart: {
         type: Date,
-        required: true,
+        required: false,
+        default: Date.now
     },
     dateEnd: {
         type: Date,
-        required: true,
+        required: false,
+        
+    },
+    target: {
+        type: Number,
+        required: false,
     },
     listMember: [{
         userId: {
@@ -36,7 +42,15 @@ const Challenge = mongoose.model("Challenge", new Schema({
             type: Number,
             default: 0,
         }
-    }]
+    }],
+    access: {
+        type: String,
+        enum: {
+            values: ['Private', 'Public'],
+            message: '{VALUE} is not supported'
+        },
+        required: true,
+    }
     }
 ))
 

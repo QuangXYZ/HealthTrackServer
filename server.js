@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import express, { application } from "express";
-import {userRouter, studentRouter} from "./routers/index.js";
+import {userRouter, studentRouter, challengeRouter} from "./routers/index.js";
 import checkToken from "./authentication/auth.js";
 dotenv.config() // must have // connect file env
 
@@ -16,9 +16,10 @@ const port = process.env.PORT || 3000;
 //router
 app.use("/users", userRouter)
 app.use("/students", studentRouter)
+app.use("/challenges", challengeRouter)
 
 app.get('/', (req, res) => {
-  res.send("Hello world! quang nguyn")
+  res.send("Hello world!")
 })
 app.listen(port, async (req, res) => {
   await connect()  // Connect to database MongoDB before listening

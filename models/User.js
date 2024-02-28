@@ -47,6 +47,10 @@ const User = mongoose.model("User", new Schema({
         required: false,
         
     },
+    healthActivity: {
+        type: [String],
+        required: false,
+    },
     idChallenges: {
         type: [String],
         required: false,

@@ -6,14 +6,14 @@ import {
 
 const router = express.Router();
 
-router.get('/', challengeController.getAllChallenges);
+router.get('/user/:idUser', challengeController.getAllChallengesByUser);
 
-router.get('/:id', challengeController.getChallengeById);
+router.get('/:idChallenge', challengeController.getChallengeById);
 
-router.post('/create', challengeController.create );
+router.post('/create', challengeController.createChallenge );
 
-router.post('/invite', challengeController.inviteUser );
+router.post('/delete/:id', challengeController.deleteChallenge );
 
-router.post('/delete', challengeController.delete );
+router.patch('/', challengeController.updateChallenge );
 
 export default router;

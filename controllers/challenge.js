@@ -1,36 +1,33 @@
 import { body, validationResult } from 'express-validator';
 import HttpStatusCode from '../exceptions/HttpStatusCode.js';
-import {studentRepository} from '../repositories/index.js';
+import {challengeRepository} from '../repositories/index.js';
 import Exception from '../exceptions/Exception.js';
 import { MAX_RECORDS } from '../global/constants.js';
-async function getAllChallenges(req, res) {
+async function getAllChallengesByUser(req, res) {
     try {
-        let filteredStudent = await studentRepository.getAllStudent({page, size, searchString})
+        let idUser = req.params.idUser
+        let filteredChallenges = await challengeRepository.getAllChallengesByUser({idUser})
         res.status(HttpStatusCode.OK).json({
-            message : 'Get all students successfully',
-            page,
-            searchString,
-            size : filteredStudent.length,
-            data : filteredStudent
+            message : 'Get all challenge successfully',
+            size : filteredChallenges.length,
+            data : filteredChallenges
         })
     } catch (error) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
             message : error.message,
         })
     }
-  
-
 }
 async function getChallengeById(req, res) {
     try {
-        let id = req.params.id
-        let student = await studentRepository.getStudentById({id})
-        if (!student) {
-            throw new Exception('Can not find student with id ' + id)
+        let id = req.params.idChallenge
+        let challenge = await challengeRepository.getChallengeById({id})
+        if (!challenge) {
+            throw new Exception('Can not find challenge with id ' + id)
         }
         res.status(HttpStatusCode.OK).json({
-            message : 'Get student successfully',
-            data : student
+            message : 'Get challenge successfully',
+            data : challenge
         })
     } catch (error) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
@@ -40,10 +37,10 @@ async function getChallengeById(req, res) {
 }
 async function createChallenge(req, res) {
     try {
-        let student = await studentRepository.updateStudent(req.body)
+        let challenge = await challengeRepository.createChallenge(req.body)
         res.status(HttpStatusCode.OK).json({
-            message : 'Update student successfully',
-            data : student
+            message : 'Create challenge successfully',
+            data : challenge
         })
     } catch (error) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
@@ -53,34 +50,34 @@ async function createChallenge(req, res) {
 }
 async function deleteChallenge(req, res) {
     try {
-        const student = await studentRepository.insertStudent(req.body)
+        let id = req.params.id
+        const challenge = await challengeRepository.deleteChallenge({id})
         res.status(HttpStatusCode.INSERT_OK).json(
-            {message : "Insert student successfully", data : student});
+            {message : "Delete challenge successfully", data : challenge});
     } catch (error) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message : "Can not insert student : " +  error.message, 
-            validationErrors : error.validationError
+            message : "Can not delete challenge : " +  error.message, 
+
         });
-        
+       
     }
 }
-async function inviteUser(req, res) {
+
+async function updateChallenge(req, res) {
     try {
-        const student = await studentRepository.insertStudent(req.body)
+        const challenge = await challengeRepository.updateChallenge(req.body)
         res.status(HttpStatusCode.INSERT_OK).json(
-            {message : "Insert student successfully", data : student});
+            {message : "Update challenge successfully", data : challenge});
     } catch (error) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message : "Can not insert student : " +  error.message, 
-            validationErrors : error.validationError
+            message : "Can not update challenge : " +  error.message, 
         });
         
-    }
-}
+    }}
 export default {
-    getAllChallenges,
+    getAllChallengesByUser,
     getChallengeById,
     createChallenge,
     deleteChallenge,
-    inviteUser
+    updateChallenge,
 }
