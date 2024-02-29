@@ -58,6 +58,16 @@ const joinChallenge = async (req, res) => {
 
 }
 
+const leaveChallenge = async (req, res) => { 
+    const {userId, idChallenge} = req.body
+    try {
+        const challenge = await userRepository.leaveChallenge({userId, idChallenge}) 
+        res.status(HttpStatusCode.INSERT_OK).json({message : 'Leave challenge successfully ', data : challenge});
+    } catch (error) {
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message : error.message});
+    }
+
+}
 
 
 
@@ -65,5 +75,6 @@ export default {
     login,
     register,
     getDetailUser ,
-    joinChallenge 
+    joinChallenge ,
+    leaveChallenge,
 }
