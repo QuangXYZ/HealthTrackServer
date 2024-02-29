@@ -81,16 +81,27 @@ const joinChallenge = async ({userId, userName,idChallenge}) => {
     
 }
 
-const leaveChallenge = async ({userId, userName,idChallenge}) => { 
+const leaveChallenge = async ({userId,idChallenge}) => { 
     try {
-        debugger
-        const user = await User.findById(userId)
-        user.idChallenges.push(idChallenge)
-        const challenge = await Challenge.findById(idChallenge)
-        challenge.listMember.push({userId, userName, accept : true})
-        challenge.userRecords.push({userId, userName})
-        await user.save()
-        await challenge.save()
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('Người dùng không tồn tại');
+        }
+        // Xóa idChallenge khỏi mảng idChallenges
+        const index = user.idChallenges.indexOf(idChallenge);
+        if (index !== -1) {
+            user.idChallenges.splice(index, 1);
+        }
+        await user.save();
+
+        // Tìm và cập nhật thách thức
+        const challenge = await Challenge.findById(idChallenge);
+        if (!challenge) {
+            throw new Error('Thách thức không tồn tại');
+        }
+        // Lọc ra listMember để loại bỏ người dùng khỏi đó
+        challenge.listMember = challenge.listMember.filter(member => member.userId !== userId);
+        await challenge.save();
 
     return challenge
         
