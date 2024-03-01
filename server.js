@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import express, { application } from "express";
+import {userRouter, studentRouter, healthActivityRouter} from "./routers/index.js";
 import {userRouter, studentRouter, challengeRouter} from "./routers/index.js";
 import checkToken from "./authentication/auth.js";
 dotenv.config() // must have // connect file env
@@ -16,6 +17,7 @@ const port = process.env.PORT || 3000;
 //router
 app.use("/users", userRouter)
 app.use("/students", studentRouter)
+app.use("/healthActivity", healthActivityRouter)
 app.use("/challenges", challengeRouter)
 
 app.get('/', (req, res) => {

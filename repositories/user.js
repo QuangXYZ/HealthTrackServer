@@ -4,10 +4,10 @@ import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 
 const login = async ({email,password}) => { 
-        debugger
+        // debugger
         const existingUser = await User.findOne({email}).exec()
         if (!!existingUser) { 
-            debugger
+            // debugger
             let isMatch = await bcrypt.compare(password,existingUser.password)
             if (!!isMatch) {
                 // Create java web token
