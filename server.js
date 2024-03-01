@@ -1,7 +1,6 @@
 import * as dotenv from "dotenv";
 import express, { application } from "express";
-import {userRouter, studentRouter, healthActivityRouter} from "./routers/index.js";
-import {userRouter, studentRouter, challengeRouter} from "./routers/index.js";
+import {userRouter, studentRouter, healthActivityRouter, challengeRouter} from "./routers/index.js";
 import checkToken from "./authentication/auth.js";
 dotenv.config() // must have // connect file env
 
