@@ -69,7 +69,28 @@ const leaveChallenge = async (req, res) => {
 
 }
 
+const updateUser = async (req, res) => {
+    const { id, email, password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges } = req.body;
+    try {
+        const updatedUser = await userRepository.updateUser({id, email, password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges });
+        res.status(HttpStatusCode.INSERT_OK).json({ message: 'User updated successfully', data: updatedUser });
+    } catch (error) {
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    }
+}
 
+const uploadProfilePicture= async(req, res) =>{
+    try {
+        debugger
+        const { userId } = req.body;
+        const imageData = req.file.buffer;
+        const contentType = req.file.mimetype;
+        await userRepository.uploadProfilePicture({userId, imageData, contentType});
+        res.json({ message: 'Profile picture uploaded successfully!' });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
 
 export default {
     login,
@@ -77,4 +98,6 @@ export default {
     getDetailUser ,
     joinChallenge ,
     leaveChallenge,
+    updateUser,
+    uploadProfilePicture
 }

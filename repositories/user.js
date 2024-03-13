@@ -59,6 +59,8 @@ const register = async ({
     
 }
 
+
+
 const joinChallenge = async ({userId, userName,idChallenge}) => { 
     try {
         debugger
@@ -111,13 +113,46 @@ const leaveChallenge = async ({userId,idChallenge}) => {
         throw new Exception("Can not join challenge")
         
     }
+
     
 }
 
+const updateUser = async ({id,email, password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges,level,exp}) => {
+    const user = await User.findById(id)
+    user.name = name ?? user.name
+    user.password = password ?? user.password
+    user.gender = gender ?? user.gender
+    user.badges = badges ?? user.badges
+    user.friends = friends ?? user.friends
+    user.dateOfBirth = dateOfBirth ?? user.dateOfBirth
+    user.healthActivity = healthActivity ?? user.healthActivity
+    user.idChallenges = idChallenges ?? user.idChallenges
+    user.level = level ?? user.level
+    user.exp = exp ?? user.exp
+
+    await user.save()
+    return user
+}
+
+const uploadProfilePicture = async ({ userId, imageData, contentType }) => {
+    try {
+        debugger
+        const user = await User.findById(userId);
+        user.profilePicture.data = imageData;
+        user.profilePicture.contentType = contentType;
+        await user.save();
+        return user;
+    } catch (error) {
+        debugger
+        throw new Exception("Failed to upload profile picture");
+    }
+};
 
 export default {
     login,
     register,
     joinChallenge,
-    leaveChallenge
+    leaveChallenge,
+    updateUser,
+    uploadProfilePicture
 }
