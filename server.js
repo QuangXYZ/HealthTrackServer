@@ -7,10 +7,14 @@ dotenv.config() // must have // connect file env
 import connect from './database/database.js'
 import { log } from "console";
 
+
 const app = express()
 app.use(checkToken) // Check token 
 app.use(express.json())  // Read json file
 const port = process.env.PORT || 3000;
+
+
+
 
 
 //router

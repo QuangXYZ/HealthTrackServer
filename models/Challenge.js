@@ -5,6 +5,12 @@ const Challenge = mongoose.model("Challenge", new Schema({
         type : String,
         required : true,
     },
+    description : {
+        type : String,
+        required : false,
+    },
+    exp: {type :Number, required : false},
+    
     dateStart: {
         type: Date,
         required: false,
