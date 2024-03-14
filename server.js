@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import express, { application } from "express";
-import {userRouter, studentRouter, healthActivityRouter, challengeRouter, healthCycleRouter} from "./routers/index.js";
+import {userRouter, studentRouter, healthActivityRouter, challengeRouter, healthCycleRouter, heightWeightRouter} from "./routers/index.js";
 import checkToken from "./authentication/auth.js";
 dotenv.config() // must have // connect file env
 
@@ -23,6 +23,7 @@ app.use("/students", studentRouter)
 app.use("/healthActivity", healthActivityRouter)
 app.use("/challenges", challengeRouter)
 app.use("/healthCycle", healthCycleRouter)
+app.use("/heightWeight", heightWeightRouter)
 
 app.get('/', (req, res) => {
   res.send("Hello world!")
