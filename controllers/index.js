@@ -3,7 +3,8 @@ import studentController from "./student.js";
 import healthActivityController from "./healthActivity.js"
 import challengeController from "./challenge.js";
 import healthCyclesController from "./healthCycles.js";
-import heightWeightController from "./heightWeight.js"
+import heightWeightController from "./heightWeight.js";
+import stepController from "./step.js";
 
 export {
     studentController,
@@ -11,5 +12,6 @@ export {
     healthActivityController,
     challengeController,
     healthCyclesController,
-    heightWeightController
+    heightWeightController,
+    stepController
 }

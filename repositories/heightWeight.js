@@ -13,13 +13,13 @@ const insertHeightWeight = async ({
     return heightWeight;
 }
 
-const getHeightWeightByIdUser = async ({ id }) => {
-    const heightWeight = await HeightWeight.find({id: id})
+const getHeightWeightByIdUser = async (idUser) => {
+    const heightWeight = await HeightWeight.find({ idUser: idUser });
     if(!heightWeight) {
-        throw new Exception('Cannot find HeightWeight with id' + id)
+      throw new Exception('Cannot find height weight with id ' + idUser)
     }
     return heightWeight
-}
+  }
 
 // const updateHeightWeight = async ({ idUser, newData }) => {
 //     try {

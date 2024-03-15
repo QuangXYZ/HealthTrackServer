@@ -4,16 +4,16 @@ import { MAX_RECORDS } from '../global/constants.js';
 import { heightWeightRepository } from '../repositories/index.js';
 
 async function getHeightWeightByIdUser(req, res) {
-    let id = req.params.idUser
+    const idUser = req.params.idUser
     try {
-        const heightWeight =  await heightWeightRepository.getHeightWeightByIdUser(id)
+        const heightWeight = await heightWeightRepository.getHeightWeightByIdUser(idUser)
         res.status(HttpStatusCode.OK).json({
             message: 'Get height weight successfully',
             data: heightWeight,
         })
-    } catch (error) {
+    } catch (exception) {
         res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: error.message,
+            message: exception.message,
         })
     }
 }
