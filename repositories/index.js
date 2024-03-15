@@ -5,7 +5,7 @@ import challengeRepository from "./challenge.js";
 import HealthCycleRepository from "./healthCycles.js";
 import heightWeightRepository from "./heightWeight.js";
 import StepRepository from "./step.js";
-import GoalsRepository from "./goals.js";
+import GoalsRepository from "./Goals.js";
 
 export {
     studentRepository,
