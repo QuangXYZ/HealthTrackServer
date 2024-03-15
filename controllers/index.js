@@ -5,6 +5,7 @@ import challengeController from "./challenge.js";
 import healthCyclesController from "./healthCycles.js";
 import heightWeightController from "./heightWeight.js";
 import stepController from "./step.js";
+import goalsController from "./goals.js"
 
 export {
     studentController,
@@ -13,5 +14,6 @@ export {
     challengeController,
     healthCyclesController,
     heightWeightController,
-    stepController
+    stepController,
+    goalsController
 }

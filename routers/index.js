@@ -5,6 +5,7 @@ import challengeRouter from './challenge.js'
 import healthCycleRouter from './healthCycle.js'
 import heightWeightRouter from './heightWeight.js'
 import stepRouter from './step.js'
+import goalsRouter from './goals.js'
 
 export {
     studentRouter,
@@ -13,5 +14,6 @@ export {
     challengeRouter,
     healthCycleRouter,
     heightWeightRouter,
-    stepRouter
+    stepRouter,
+    goalsRouter
 }

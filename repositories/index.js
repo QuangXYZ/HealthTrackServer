@@ -4,7 +4,8 @@ import HealthActivityRepository from "./healthActivity.js";
 import challengeRepository from "./challenge.js";
 import HealthCycleRepository from "./healthCycles.js";
 import heightWeightRepository from "./heightWeight.js";
-import StepRepository from "./step.js"
+import StepRepository from "./step.js";
+import GoalsRepository from "./goals.js";
 
 export {
     studentRepository,
@@ -13,5 +14,6 @@ export {
     challengeRepository,
     HealthCycleRepository,
     heightWeightRepository,
-    StepRepository
+    StepRepository,
+    GoalsRepository
 }

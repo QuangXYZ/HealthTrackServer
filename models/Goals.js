@@ -5,7 +5,6 @@ const GoalsSchema = new Schema({
     caloGoals: { type: Number },
     distanceGoals: { type: Number },
     timeGoals: { type: String },
-    levelGoals: { type: String },
 });
 
 const Goals = model('Goals', GoalsSchema);

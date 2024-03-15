@@ -15,11 +15,11 @@ const insertHeightWeight = async ({
 
 const getHeightWeightByIdUser = async (idUser) => {
     const heightWeight = await HeightWeight.find({ idUser: idUser });
-    if(!heightWeight) {
-      throw new Exception('Cannot find height weight with id ' + idUser)
+    if (!heightWeight) {
+        throw new Exception('Cannot find height weight with id ' + idUser)
     }
     return heightWeight
-  }
+}
 
 // const updateHeightWeight = async ({ idUser, newData }) => {
 //     try {
@@ -45,12 +45,12 @@ const getHeightWeightByIdUser = async (idUser) => {
 //     } catch (error) {
 //         throw error;
 //     }
-    
+
 // }
 
 const updateHeightWeight = async ({ idUser, newData }) => {
     try {
-        const existingRecord = await HeightWeight.findOne({ idUser});
+        const existingRecord = await HeightWeight.findOne({ idUser });
 
         if (!existingRecord) {
             throw new Error('Health activity not found for the given idUser .');
