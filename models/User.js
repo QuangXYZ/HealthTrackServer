@@ -22,8 +22,10 @@ const User = mongoose.model("User", new Schema({
         required: true,
     },
     profilePicture: {
+        type: String,
         data: Buffer, // Dữ liệu hình ảnh
         contentType: String ,// Loại dữ liệu của hình ảnh
+        required: false,
     },
     password : { 
         type : String,
@@ -36,7 +38,7 @@ const User = mongoose.model("User", new Schema({
             values: ['Male', 'Female'],
             message: '{VALUE} is not supported'
         },
-        required: true,
+        required: false,
     },
     badges: {
         type: [String],
@@ -63,12 +65,12 @@ const User = mongoose.model("User", new Schema({
     level: {
         type: Number,
         default: 1,
-        required: true
+        required: false
     },
     exp: {
         type: Number,
         default: 0,
-        required: true
+        required: false
     },
 
 }
