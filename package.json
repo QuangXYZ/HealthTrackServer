@@ -4,7 +4,7 @@
   "description": "test backend server for app healtrack",
   "main": "server.js",
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "type": "module",
   "scripts": {
