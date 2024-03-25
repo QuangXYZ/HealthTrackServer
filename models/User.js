@@ -21,6 +21,7 @@ const User = mongoose.model("User", new Schema({
         },
         required: true,
     },
+
     profilePicture: {
         type: String,
         data: Buffer, // Dữ liệu hình ảnh
@@ -72,6 +73,19 @@ const User = mongoose.model("User", new Schema({
         default: 0,
         required: false
     },
+    friendList: {
+        type: [String],
+        required: false,
+    },
+    friendMyRequest: {
+        type: [String],
+        required: false,
+    },
+    friendRequest: {
+        type: [String],
+        required: false,
+    }
+
 
 }
 ))

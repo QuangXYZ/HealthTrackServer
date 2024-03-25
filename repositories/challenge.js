@@ -17,6 +17,21 @@ const getAllChallengesByUser = async ({idUser}) => {
     
     return filteredChallenge
 }
+const getPublicChallenge = async () => {
+    let filteredChallenge = await Challenge.aggregate([
+        {
+            $match : {
+                $or : [
+                    {
+                        "access" : {$regex : `.*${"Public"}.*`, $options : "i"}
+                    }
+                ]
+            }
+        },    
+    ])
+    
+    return filteredChallenge
+}
 
 const getChallengeById = async ({id}) => {
     let challenge = await Challenge.findById(id)
@@ -31,10 +46,10 @@ const getChallengeById = async ({id}) => {
     } 
 }
 
-const createChallenge = async ({name, dateEnd, target, listMember, userRecords, access}) => {
+const createChallenge = async ({name, dateStart,dateEnd,description, target, listMember, userRecords, access,exp}) => {
     try {
         debugger
-        const challenge = await Challenge.create({name, dateEnd, target, listMember, userRecords,access})
+        const challenge = await Challenge.create({name, dateStart,dateEnd,description, target, listMember, userRecords, access,exp})
         return challenge
     } catch (error) {
         debugger
@@ -42,6 +57,7 @@ const createChallenge = async ({name, dateEnd, target, listMember, userRecords, 
     }
     
 }
+
 
 const deleteChallenge = async({id}) => {
     try {
@@ -68,6 +84,7 @@ export default {
     getAllChallengesByUser,
     getChallengeById,
     createChallenge,
+    getPublicChallenge,
     updateChallenge,
     deleteChallenge
 }
