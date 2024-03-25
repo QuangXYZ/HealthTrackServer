@@ -8,8 +8,6 @@ const router = express.Router();
 
 router.get('/user/:idUser', challengeController.getAllChallengesByUser);
 
-router.get('/', challengeController.getPublicChallenge);
-
 router.get('/:idChallenge', challengeController.getChallengeById);
 
 router.post('/create', challengeController.createChallenge );
