@@ -24,12 +24,12 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => { 
-    const {email,password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges} = req.body
+    const {email,password, name} = req.body
     myEvent.emit('event.register.user', req.body)
     try {
         debugger
         const user = await userRepository.register({
-            email,password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges
+            email,password, name
         }) 
         res.status(HttpStatusCode.INSERT_OK).json({message : 'Post register user', data : user});
     } catch (error) {
@@ -92,6 +92,19 @@ const uploadProfilePicture= async(req, res) =>{
     }
 }
 
+
+const addFriend = async (req, res) => { 
+    const {userId, friendId} = req.body
+    try {
+        debugger
+        const challenge = await userRepository.addFriend({userId,friendId}) 
+        res.status(HttpStatusCode.INSERT_OK).json({message : 'Join challenge successfully ', data : challenge});
+    } catch (error) {
+        debugger
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message : error.message});
+    }
+
+}
 export default {
     login,
     register,
@@ -99,5 +112,6 @@ export default {
     joinChallenge ,
     leaveChallenge,
     updateUser,
-    uploadProfilePicture
+    uploadProfilePicture,
+    addFriend
 }

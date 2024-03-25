@@ -36,7 +36,7 @@ const login = async ({email,password}) => {
     
 }
 const register = async ({
-    email, password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges
+    email, password, name
     }) => { 
     try {
         debugger
@@ -47,7 +47,7 @@ const register = async ({
         // encrypt password with salt rounds
         const hashedPassword = await bcrypt.hash(password,parseInt(process.env.SALT_ROUNDS))
         const newUser = await User.create({
-            name, email, password: hashedPassword, gender, badges, friends, dateOfBirth, healthActivity, idChallenges
+            name, email, password: hashedPassword
         })
         return {...newUser._doc,password: 'Not show'}
     } catch (error) {
@@ -117,7 +117,7 @@ const leaveChallenge = async ({userId,idChallenge}) => {
     
 }
 
-const updateUser = async ({id,email, password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges,level,exp}) => {
+const updateUser = async ({id, password, name, gender, badges, friends, dateOfBirth, healthActivity, idChallenges,level,exp}) => {
     const user = await User.findById(id)
     user.name = name ?? user.name
     user.password = password ?? user.password
@@ -131,6 +131,18 @@ const updateUser = async ({id,email, password, name, gender, badges, friends, da
     user.exp = exp ?? user.exp
 
     await user.save()
+    return user
+}
+const addFriend = async ({userId, friendId}) => {
+    const user = await User.findById(userId)
+    const friend = await User.findById(friendId)
+    if (!friend || !user ) throw new Error('Người dùng không tồn tại');
+
+    user.friendMyRequest.push(friendId);
+    friend.friendRequest.push(userId);
+
+    await user.save()
+    await friend.save()
     return user
 }
 
@@ -154,5 +166,6 @@ export default {
     joinChallenge,
     leaveChallenge,
     updateUser,
-    uploadProfilePicture
+    uploadProfilePicture,
+    addFriend
 }

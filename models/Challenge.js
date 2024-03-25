@@ -8,8 +8,9 @@ const Challenge = mongoose.model("Challenge", new Schema({
     description : {
         type : String,
         required : false,
+        default : "No description"
     },
-    exp: {type :Number, required : false},
+    exp: {type :Number, required : false, default : 100},
     
     dateStart: {
         type: Date,
@@ -19,6 +20,7 @@ const Challenge = mongoose.model("Challenge", new Schema({
     dateEnd: {
         type: Date,
         required: false,
+        default: Date.now
         
     },
     target: {

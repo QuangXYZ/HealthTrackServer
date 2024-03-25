@@ -18,10 +18,12 @@ router.post('/login',
 router.post('/register', userController.register );
 
 router.post('/challenge', userController.joinChallenge );
+router.post('/challenge/leave ', userController.leaveChallenge );
 
 router.get('/:id', userController.getDetailUser );
 
 router.post('/upload',upload.single('imageData'), userController.uploadProfilePicture );
 
+router.post('/friends/add ', userController.addFriend);
 
 export default router;
