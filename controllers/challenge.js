@@ -18,6 +18,20 @@ async function getAllChallengesByUser(req, res) {
         })
     }
 }
+
+async function getPublicChallenge(req, res) {
+    try {
+        let filteredChallenges = await challengeRepository.getPublicChallenge({})
+        res.status(HttpStatusCode.OK).json({
+            message : 'Get all challenge public successfully',
+            data : filteredChallenges
+        })
+    } catch (error) {
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message : error.message,
+        })
+    }
+}
 async function getChallengeById(req, res) {
     try {
         let id = req.params.idChallenge
@@ -77,6 +91,7 @@ async function updateChallenge(req, res) {
 export default {
     getAllChallengesByUser,
     getChallengeById,
+    getPublicChallenge,
     createChallenge,
     deleteChallenge,
     updateChallenge,
