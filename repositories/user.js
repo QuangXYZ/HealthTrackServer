@@ -85,33 +85,27 @@ const joinChallenge = async ({userId, userName,idChallenge}) => {
 
 const leaveChallenge = async ({userId,idChallenge}) => { 
     try {
-        const user = await User.findById(userId);
-        if (!user) {
-            throw new Error('Người dùng không tồn tại');
+        const user = await User.findById(userId)
+        const index = user.idChallenges.indexOf(idChallenge)
+        if (index > -1) {
+            user.idChallenges.splice(index, 1)
         }
-        // Xóa idChallenge khỏi mảng idChallenges
-        const index = user.idChallenges.indexOf(idChallenge);
-        if (index !== -1) {
-            user.idChallenges.splice(index, 1);
-        }
-        await user.save();
+        await user.save()
 
-        // Tìm và cập nhật thách thức
-        const challenge = await Challenge.findById(idChallenge);
-        if (!challenge) {
-            throw new Error('Thách thức không tồn tại');
+        const challenge = await Challenge.findById(idChallenge)
+        const memberIndex = challenge.listMember.findIndex(member => member.userId === userId)
+        if (memberIndex > -1) {
+            challenge.listMember.splice(memberIndex, 1)
         }
-        // Lọc ra listMember để loại bỏ người dùng khỏi đó
-        challenge.listMember = challenge.listMember.filter(member => member.userId !== userId);
-        await challenge.save();
-
-    return challenge
-        
+        const recordIndex = challenge.userRecords.findIndex(member => member.userId === userId)
+        if (recordIndex > -1) {
+            challenge.userRecords.splice(recordIndex, 1)
+        }
+        await challenge.save()
     } catch (error) {
         // check model validation   
         debugger
-        throw new Exception("Can not join challenge")
-        
+        throw new Exception("Can not leave challenge")
     }
 
     

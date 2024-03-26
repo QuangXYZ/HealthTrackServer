@@ -18,7 +18,7 @@ router.post('/login',
 router.post('/register', userController.register );
 
 router.post('/challenge', userController.joinChallenge );
-router.post('/challenge/leave ', userController.leaveChallenge );
+router.post('/leave ', userController.leaveChallenge );
 
 router.get('/:id', userController.getDetailUser );
 
